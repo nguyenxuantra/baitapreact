@@ -1,5 +1,5 @@
 import { Descriptions, Modal } from "antd";
-import { employees } from "../data/employees";
+import { employees } from "../../data/employees";
 
 
 interface PropsEmployeeCard{

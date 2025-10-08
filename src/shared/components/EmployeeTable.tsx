@@ -1,5 +1,6 @@
 import { Table, type TableProps } from "antd";
-import type { Employee } from "../data/employees";
+import type { Employee } from "../../data/employees";
+
 
 
 
