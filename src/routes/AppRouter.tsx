@@ -1,13 +1,22 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import MainLayout from "../layouts/MainLayout";
-import Employee from "../pages/Employee";
+import MainLayout from "../shared/layouts/MainLayout";
+import Employee from "../pages/Employee/Employee";
+import EmployeeEdit from "../pages/Employee/EmployeeEdit";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
         children: [
-            {path: "/", element: <Employee />},
+            {
+                path: "/",
+                index:true,
+                element: <Employee />
+            }, 
+            {
+                path:"employee/:id/edit",
+                element: <EmployeeEdit/>
+            }
         ],
     },
 ]);

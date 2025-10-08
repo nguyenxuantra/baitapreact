@@ -1,4 +1,4 @@
-import EmployeeList from "../components/EmployeeList";
+import EmployeeList from "../../shared/components/EmployeeList";
 
 const Employee = () =>{
     return(
