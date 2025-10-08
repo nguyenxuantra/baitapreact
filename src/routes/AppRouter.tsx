@@ -1,7 +1,8 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import MainLayout from "../shared/layouts/MainLayout";
 import Employee from "../pages/Employee/Employee";
-import EmployeeEdit from "../pages/Employee/EmployeeEdit";
+import { employeeRouter } from "../pages/Employee/employeeRouter";
+
 
 const router = createBrowserRouter([
     {
@@ -13,10 +14,8 @@ const router = createBrowserRouter([
                 index:true,
                 element: <Employee />
             }, 
-            {
-                path:"employee/:id/edit",
-                element: <EmployeeEdit/>
-            }
+            ...employeeRouter,
+            
         ],
     },
 ]);

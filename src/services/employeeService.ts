@@ -1,9 +1,10 @@
-import type { AxiosResponse } from "axios";
-import { baseService } from "./baseService";
+
+import type { Employee } from "../stores/employees/EmployeeStore";
+import baseApi from "./baseApi";
 
 
-// export class employeeService{
-//     getEmployee(productId: number) : Promise<AxiosResponse>{
-//         return baseService
-//     }
-// }
+
+const employeeService = {
+    getAll: ()=> baseApi.get<Employee[]>('/employee')
+}
+export default employeeService;
