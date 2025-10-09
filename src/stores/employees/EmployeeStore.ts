@@ -16,8 +16,22 @@ export class EmployeeStore {
     employee: Employee[] = [];
     loading = false;
     error : string | null = null;
+    
     constructor(){
         makeAutoObservable(this);
+    }
+
+    updateEmployee(updatedEmployee: Employee) {
+        runInAction(() => {
+            const index = this.employee.findIndex(e => e.id === updatedEmployee.id);
+            if (index !== -1) {
+                this.employee = [
+                    ...this.employee.slice(0, index),
+                    updatedEmployee,
+                    ...this.employee.slice(index + 1)
+                ];
+            }
+        });
     }
 
     fetchEmployee = async()=>{

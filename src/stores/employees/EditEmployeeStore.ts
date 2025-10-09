@@ -1,32 +1,29 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import employeeService from "../../services/employee/employeeService";
-import type { Employee, EmployeeStore } from "./EmployeeStore";
+import type {Employee, EmployeeStore} from "./EmployeeStore";
 
-export class EditEmployeeStore{
+export class EditEmployeeStore {
     loading = false;
     error: string | null = null;
 
-    constructor(){
+    constructor() {
         makeAutoObservable(this);
     }
-    fetchEditEmployee = async(data: Employee, id: number, employeeStore: EmployeeStore)=>{
-        this.loading=true;
-        try{
-            const response = await employeeService.update(data,id);
-            runInAction(()=>{
+    fetchEditEmployee = async (data: Employee, id: number, employeeStore: EmployeeStore) => {
+        this.loading = true;
+        try {
+            const response = await employeeService.update(data, id);
+            runInAction(() => {
                 this.loading = false;
-                const index = employeeStore.employee.findIndex(e => e.id === id);
-                if(index !== -1) {
-                    employeeStore.employee.splice(index, 1, response);
-                }
-            })
-        }catch(error){
-            runInAction(()=>{
-                this.loading=false;
-                this.error = error instanceof Error ? error.message:'update thất bại';
-            })
+                employeeStore.updateEmployee(response);
+            });
+        } catch (error) {
+            runInAction(() => {
+                this.loading = false;
+                this.error = error instanceof Error ? error.message : "update thất bại";
+            });
         }
-    }
+    };
 }
 
 export const editEmployeeStore = new EditEmployeeStore();
