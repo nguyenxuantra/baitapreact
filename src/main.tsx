@@ -5,9 +5,9 @@ import {RootStoreContext} from "./context/RootStoreContext.ts";
 import rootStore from "./stores/rootStore.ts";
 
 createRoot(document.getElementById("root")!).render(
-    <StrictMode>
+     <StrictMode>
         <RootStoreContext.Provider value={rootStore}>
             <App />
         </RootStoreContext.Provider>
-    </StrictMode>
+     </StrictMode>
 );

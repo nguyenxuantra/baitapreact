@@ -1,21 +1,30 @@
-import { Table, type TableProps } from "antd";
-import type { Employee } from "../../data/employees";
+import {Table, type TableProps} from "antd";
+import type {Employee} from "../../stores/employees/EmployeeStore";
 
-
-
-
-
-interface PropEmployee{
+interface PropEmployee {
     data: Employee[];
-    columns: TableProps<Employee>['columns'];
+    columns: TableProps<Employee>["columns"];
+    loading: boolean;
 }
 
-const EmployeeTable = ({data, columns}:PropEmployee) =>{
-    return(
+const EmployeeTable = ({data, columns, loading}: PropEmployee) => {
+    return (
         <>
-            <Table<Employee> columns={columns} dataSource={data} rowKey="id"/>
+            <Table<Employee>
+                columns={columns}
+                dataSource={data}
+                rowKey="id"
+                loading={loading}
+                
+                pagination={{
+                    pageSize: 8,
+                    position:["bottomCenter"]
+                }}
+                
+            />
+            
         </>
-    )
+    );
 };
 
 export default EmployeeTable;

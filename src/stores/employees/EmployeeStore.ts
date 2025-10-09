@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import employeeService from "../../services/employeeService";
+import employeeService from "../../services/employee/employeeService";
 
 
 export interface Employee{
@@ -9,18 +9,18 @@ export interface Employee{
     avatar: string;
     country: string;
     city: string;
+    createdAt:string;
 }
 
 export class EmployeeStore {
     employee: Employee[] = [];
     loading = false;
     error : string | null = null;
-
     constructor(){
         makeAutoObservable(this);
     }
 
-    async fetchEmployee(){
+    fetchEmployee = async()=>{
         this.loading = true;
         try{
             const response = await employeeService.getAll();
@@ -34,6 +34,9 @@ export class EmployeeStore {
                 this.error = error instanceof Error ? error.message : 'An unknown error occurred';
             })
         }
+    }
+    get listEmployee(){
+        return this.employee;
     }
 }
 

@@ -8,28 +8,28 @@ const EmployeeFilter = ({handleSelect}: PropEmployeeFilter) => {
     return (
         <>
             <Select
-                defaultValue={"Chức vụ"}
+                defaultValue={"Country"}
                 onChange={handleSelect}
                 options={[
                     {
                         value: "all",
-                        label: "Chức vụ",
+                        label: "Country",
                     },
                     {
-                        value: "Frontend Dev",
-                        label: "Frontend Dev",
+                        value: "cumbria",
+                        label: "Cumbria",
                     },
                     {
-                        value: "Backend Dev",
-                        label: "Backend Dev",
+                        value: "derbyshire",
+                        label: "Derbyshire",
                     },
                     {
-                        value: "Manager",
-                        label: "Manager",
+                        value: "lancashire",
+                        label: "Lancashire",
                     },
                     {
-                        value: "UI/UX Designer",
-                        label: "UI/UX Designer",
+                        value: "northumberland",
+                        label: "Northumberland",
                     },
                 ]}
             />
