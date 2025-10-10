@@ -33,7 +33,23 @@ export class EmployeeStore {
             }
         });
     }
-
+    deleteEmployee(deleteEmployee: Employee){
+        runInAction(()=>{
+            const index = this.employee.findIndex(e => e.id === deleteEmployee.id)
+            if(index != -1){
+                this.employee = [
+                    ...this.employee.slice(0,index),
+                    ...this.employee.slice(index+1)
+                ]
+            }
+        })
+    }
+    createEmployee(createEmployee: Employee){
+        this.employee=[
+            createEmployee,
+            ...this.employee
+        ]
+    }
     fetchEmployee = async()=>{
         this.loading = true;
         try{

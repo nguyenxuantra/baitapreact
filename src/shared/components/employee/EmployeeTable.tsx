@@ -1,5 +1,5 @@
 import {Table, type TableProps} from "antd";
-import type {Employee} from "../../stores/employees/EmployeeStore";
+import type {Employee} from "../../../stores/employees/EmployeeStore";
 
 interface PropEmployee {
     data: Employee[];

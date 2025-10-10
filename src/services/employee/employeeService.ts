@@ -6,6 +6,8 @@ import baseApi from "../baseApi";
 
 const employeeService = {
     getAll: ()=> baseApi.get<Employee[]>('/employee/Employee'),
-    update: (data:Employee, id:number)=> baseApi.put<Employee>(`/employee/Employee/${id}`,data)
+    update: (data:Employee, id:number)=> baseApi.put<Employee>(`/employee/Employee/${id}`,data),
+    delete: (id:number)=>baseApi.delete<Employee>(`/employee/Employee/${id}`),
+    create: (data:Employee)=>baseApi.post<Employee>('/employee/Employee',data)
 }
 export default employeeService;
