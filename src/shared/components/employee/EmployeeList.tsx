@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Col, Row, type TableProps } from "antd";
+import { Avatar, Button, Col, Row, type TableProps } from "antd";
 
 import EmployeeTable from "./EmployeeTable";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";

@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import { useRootStore } from "../../../context/RootStoreContext";
 import { observer } from "mobx-react-lite";
-import { memo, useMemo } from "react";
+import { useMemo } from "react";
 
 interface PropEmployeeFilter {
   handleSelect: (value: string) => void;
