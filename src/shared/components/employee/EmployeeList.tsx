@@ -1,4 +1,4 @@
-import {Avatar, Button, Col, Flex, Row, type TableProps} from "antd";
+import {Avatar, Button, Col, Row, type TableProps} from "antd";
 
 import EmployeeTable from "./EmployeeTable";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
@@ -6,7 +6,6 @@ import EmployeeDetail from "./EmployeeDetail";
 import {useEffect, useMemo, useState} from "react";
 import EmployeeSearch from "./EmployeeSearch";
 import EmployeeFilter from "./EmployeeFilter";
-import {useNavigate} from "react-router-dom";
 import {useRootStore} from "../../../context/RootStoreContext";
 import type {Employee} from "../../../stores/employees/EmployeeStore";
 import {observer} from "mobx-react-lite";
