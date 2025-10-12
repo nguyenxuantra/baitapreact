@@ -55,6 +55,9 @@ const EmployeeCreate = observer(({isCreateEmployee, setCreateEmployee}: PropCrea
                 <Form.Item label="Country" name="country" rules={[{required: true}]}>
                     <Input placeholder="Quốc gia" />
                 </Form.Item>
+                <Form.Item label="Department" name="department" rules={[{required: true}]}>
+                    <Input placeholder="Phòng ban" />
+                </Form.Item>
                 <Form.Item label="Address" name="address" rules={[{required: true}]}>
                     <Input placeholder="Địa chỉ" />
                 </Form.Item>

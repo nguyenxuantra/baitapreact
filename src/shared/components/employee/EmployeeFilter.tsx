@@ -18,7 +18,7 @@ const EmployeeFilter = observer(({ handleSelect }: PropEmployeeFilter) => {
     return [{ value: "all", label: "All Departments" }, 
         ...departmentOptions];
   },[employeeStore.employee]);
-
+   
   return (
     <>
       <Select

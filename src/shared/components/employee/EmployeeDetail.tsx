@@ -66,6 +66,9 @@ const EmployeeDetail = observer(({isOpenEmployee, setOpenEmployee, idEmployee}: 
                 <Form.Item label="Country" name="country" rules={[{required: true}]}>
                     <Input />
                 </Form.Item>
+                <Form.Item label="Department" name="department" rules={[{required: true}]}>
+                    <Input placeholder="Phòng ban" />
+                </Form.Item>
                 <Form.Item label="Address" name="address" rules={[{required: true}]}>
                     <Input />
                 </Form.Item>
