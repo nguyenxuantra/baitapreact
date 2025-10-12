@@ -10,6 +10,7 @@ export interface Employee{
     country: string;
     city: string;
     createdAt:string;
+    department:string;
 }
 
 export class EmployeeStore {

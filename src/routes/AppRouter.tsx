@@ -1,7 +1,6 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import MainLayout from "../shared/layouts/MainLayout";
 import Employee from "../pages/Employee/Employee";
-import { employeeRouter } from "../pages/Employee/employeeRouter";
 
 
 const router = createBrowserRouter([
@@ -14,7 +13,7 @@ const router = createBrowserRouter([
                 index:true,
                 element: <Employee />
             }, 
-            ...employeeRouter,
+            // ...employeeRouter,
             
         ],
     },

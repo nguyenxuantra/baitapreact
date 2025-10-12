@@ -1,9 +1,9 @@
 
-import EmployeeEdit from "./EmployeeEdit";
+// import EmployeeEdit from "./EmployeeEdit";
 
-export const employeeRouter = [
-    {
-        path: "employee/:id/edit",
-        element: <EmployeeEdit />,
-    }
-];
+// export const employeeRouter = [
+//     {
+//         path: "employee/:id/edit",
+//         element: <EmployeeEdit />,
+//     }
+// ];
