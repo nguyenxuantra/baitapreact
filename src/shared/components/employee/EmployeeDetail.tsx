@@ -17,7 +17,6 @@ const EmployeeDetail = observer(({isOpenEmployee, setOpenEmployee, idEmployee}: 
     const {loading, fetchEditEmployee} = editEmployeeStore;
     const employee = employeeStore.employee.find((employees) => employees.id === idEmployee);
     const [form] = Form.useForm();
-    console.log("đây là id", idEmployee);
     const handleCancel = () => {
         setOpenEmployee(false);
         setChange(true);
