@@ -83,11 +83,7 @@ const EmployeeCard = observer(() => {
                         return (
                             <Col key={emp.id} span={6}>
                                 <Card variant="borderless">
-                                    <Form
-                                        labelCol={{span: 10}}
-                                        wrapperCol={{span: 14}}
-                                        initialValues={emp || {}}
-                                    >
+                                    <Form labelCol={{span: 10}} wrapperCol={{span: 14}} initialValues={emp || {}}>
                                         <Form.Item
                                             label="Name"
                                             name="name"
@@ -111,6 +107,25 @@ const EmployeeCard = observer(() => {
                                         <Form.Item label="Address" name="address" rules={[{required: true}]}>
                                             <Input placeholder="Địa chỉ" />
                                         </Form.Item>
+                                        <Form.Item>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "end",
+                                                    alignItems: "center",
+                                                    gap: 10,
+                                                }}
+                                            >
+                                                <Button>Delete</Button>
+                                                <Button
+                                                    // disabled={isChage}
+                                                    type="primary"
+                                                    loading={loading}
+                                                >
+                                                    Save
+                                                </Button>
+                                            </div>
+                                        </Form.Item>
                                     </Form>
                                 </Card>
                             </Col>
@@ -120,16 +135,16 @@ const EmployeeCard = observer(() => {
                 <Row>
                     <Col span={24}>
                         <Pagination
-                          page={page}
-                          setPage={setPage}
-                          pageSize={pageSize}
-                          setPageSize={setPageSize}
-                          totalEmployee={dataLength}
+                            page={page}
+                            setPage={setPage}
+                            pageSize={pageSize}
+                            setPageSize={setPageSize}
+                            totalEmployee={dataLength}
                         />
                     </Col>
                 </Row>
             </Spin>
-            
+
             <EmployeeCreate isCreateEmployee={isCreateEmployee} setCreateEmployee={setCreateEmployee} />
         </>
     );

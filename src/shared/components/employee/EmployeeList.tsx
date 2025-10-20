@@ -181,13 +181,15 @@ const EmployeeList = observer(() => {
                 <Col span={24}>
                     <EmployeeTable data={dataSearch} columns={columns} loading={loading} />
                 </Col>
-                <Pagination
-                  page={page}
-                  setPage={setPage}
-                  pageSize={pageSize}
-                  setPageSize={setPageSize}
-                  totalEmployee={dataLength}
-                />
+                <Col span={24}>
+                    <Pagination
+                        page={page}
+                        setPage={setPage}
+                        pageSize={pageSize}
+                        setPageSize={setPageSize}
+                        totalEmployee={dataLength}
+                    />
+                </Col>
             </Row>
             <EmployeeDetail
                 isOpenEmployee={isOpenEmployee}
