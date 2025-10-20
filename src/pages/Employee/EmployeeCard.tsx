@@ -8,6 +8,9 @@ import EmployeeFilter from "../../shared/components/employee/EmployeeFilter";
 import EmployeeCreate from "../../shared/components/employee/EmployeeCreate";
 import {observer} from "mobx-react-lite";
 import Pagination from "../../shared/components/pagination/pagination";
+import {useNavigate} from "react-router-dom";
+import type {Employee} from "../../stores/employees/EmployeeStore";
+import EmployeeCardEdit from "../../shared/components/employee/EmployeeCardEdit";
 
 const EmployeeCard = observer(() => {
     // employee store
@@ -16,6 +19,7 @@ const EmployeeCard = observer(() => {
     useEffect(() => {
         fetchEmployee();
     }, []);
+    
     // state search, select, pagination
     const [search, setSearch] = useState("");
     const [select, setSelect] = useState("all");
@@ -44,6 +48,7 @@ const EmployeeCard = observer(() => {
         const {dataSearch, dataLength} = handleFilter(search, select, page, pageSize, employee);
         return {dataSearch, dataLength};
     }, [employee, select, search, page, pageSize]);
+    
 
     return (
         <>
@@ -78,60 +83,7 @@ const EmployeeCard = observer(() => {
                 </Col>
             </Row>
             <Spin spinning={loading}>
-                <Row style={{margin: 10}} gutter={[16, 16]}>
-                    {dataSearch.map((emp) => {
-                        return (
-                            <Col key={emp.id} span={6}>
-                                <Card variant="borderless">
-                                    <Form labelCol={{span: 10}} wrapperCol={{span: 14}} initialValues={emp || {}}>
-                                        <Form.Item
-                                            label="Name"
-                                            name="name"
-                                            rules={[{required: true, message: "Vui lòng nhập tên nhân viên"}]}
-                                        >
-                                            <Input placeholder="Tên nhân viên" />
-                                        </Form.Item>
-                                        <Form.Item
-                                            label="City"
-                                            name="city"
-                                            rules={[{required: true, message: "Vui lòng nhập thành phố"}]}
-                                        >
-                                            <Input placeholder="Thành Phố" />
-                                        </Form.Item>
-                                        <Form.Item label="Country" name="country" rules={[{required: true}]}>
-                                            <Input placeholder="Quốc gia" />
-                                        </Form.Item>
-                                        <Form.Item label="Department" name="department" rules={[{required: true}]}>
-                                            <Input placeholder="Phòng ban" />
-                                        </Form.Item>
-                                        <Form.Item label="Address" name="address" rules={[{required: true}]}>
-                                            <Input placeholder="Địa chỉ" />
-                                        </Form.Item>
-                                        <Form.Item>
-                                            <div
-                                                style={{
-                                                    display: "flex",
-                                                    justifyContent: "end",
-                                                    alignItems: "center",
-                                                    gap: 10,
-                                                }}
-                                            >
-                                                <Button>Delete</Button>
-                                                <Button
-                                                    // disabled={isChage}
-                                                    type="primary"
-                                                    loading={loading}
-                                                >
-                                                    Save
-                                                </Button>
-                                            </div>
-                                        </Form.Item>
-                                    </Form>
-                                </Card>
-                            </Col>
-                        );
-                    })}
-                </Row>
+                <EmployeeCardEdit dataSearch={dataSearch}/>
                 <Row>
                     <Col span={24}>
                         <Pagination

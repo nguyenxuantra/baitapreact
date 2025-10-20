@@ -11,7 +11,7 @@ const EmployeeEdit = observer(() => {
   const { id } = useParams();
   // handle change form
   const [isChage, setChange] = useState<boolean>(true);
-  // employee store
+  // employee edit store
   const { employeeStore } = useRootStore();
   const { editEmployeeStore } = useRootStore();
   const { loading, fetchEditEmployee } = editEmployeeStore;
