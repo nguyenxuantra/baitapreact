@@ -7,6 +7,7 @@ import EmployeeTotal from "../../shared/components/employee/EmployeeTotal";
 import EmployeeFilter from "../../shared/components/employee/EmployeeFilter";
 import EmployeeCreate from "../../shared/components/employee/EmployeeCreate";
 import {observer} from "mobx-react-lite";
+import Pagination from "../../shared/components/pagination/pagination";
 
 const EmployeeCard = observer(() => {
     // employee store
@@ -76,7 +77,6 @@ const EmployeeCard = observer(() => {
                     </Row>
                 </Col>
             </Row>
-
             <Spin spinning={loading}>
                 <Row style={{margin: 10}} gutter={[16, 16]}>
                     {dataSearch.map((emp) => {
@@ -119,11 +119,17 @@ const EmployeeCard = observer(() => {
                 </Row>
                 <Row>
                     <Col span={24}>
-                        
+                        <Pagination
+                          page={page}
+                          setPage={setPage}
+                          pageSize={pageSize}
+                          setPageSize={setPageSize}
+                          totalEmployee={dataLength}
+                        />
                     </Col>
                 </Row>
             </Spin>
-
+            
             <EmployeeCreate isCreateEmployee={isCreateEmployee} setCreateEmployee={setCreateEmployee} />
         </>
     );

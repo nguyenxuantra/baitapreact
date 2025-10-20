@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRootStore } from "../../context/RootStoreContext";
 import { Avatar, Button, Form, Input } from "antd";
