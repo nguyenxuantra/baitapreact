@@ -22,7 +22,7 @@ const EmployeeFilter = observer(({ handleSelect }: PropEmployeeFilter) => {
   return (
     <>
       <Select
-        defaultValue={"Department"}
+        defaultValue={"All Department"}
         style={{ marginLeft: 10 }}
         onChange={handleSelect}
         options={options}
