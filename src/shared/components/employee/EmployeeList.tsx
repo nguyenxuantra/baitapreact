@@ -139,7 +139,7 @@ const EmployeeList = observer(() => {
 
     return (
         <>
-            <Row style={{marginBottom: 20}}>
+            <Row style={{margin:10}}>
                 <Col span={6}>
                     <EmployeeSearch onSearch={handleSearch} />
                 </Col>
@@ -149,7 +149,7 @@ const EmployeeList = observer(() => {
                             <EmployeeTotal totalEmployee={dataLength} />
                         </Col>
                         <Col>
-                            <EmployeeFilter handleSelect={handleSelect} />
+                            <EmployeeFilter value={select} handleSelect={handleSelect} />
                         </Col>
                         <Col>
                             <Button onClick={handleReset} style={{marginLeft: 10}}>
@@ -177,7 +177,7 @@ const EmployeeList = observer(() => {
                     </Row>
                 </Col>
             </Row>
-            <Row>
+            <Row  style={{margin:10}}>
                 <Col span={24}>
                     <EmployeeTable data={dataSearch} columns={columns} loading={loading} />
                 </Col>

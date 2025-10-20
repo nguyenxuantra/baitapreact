@@ -5,8 +5,10 @@ import {  useMemo } from "react";
 
 interface PropEmployeeFilter {
   handleSelect: (value: string) => void;
+  value: string;
 }
-const EmployeeFilter = observer(({ handleSelect }: PropEmployeeFilter) => {
+const EmployeeFilter = observer(({ handleSelect, value }: PropEmployeeFilter) => {
+  console.log("render filter")
   const { employeeStore } = useRootStore();
   const options = useMemo(() => {
     const departmentOptions = Array.from(
@@ -21,6 +23,7 @@ const EmployeeFilter = observer(({ handleSelect }: PropEmployeeFilter) => {
   return (
     <>
       <Select
+        value={value}
         defaultValue={"All Department"}
         style={{ marginLeft: 10 }}
         onChange={handleSelect}

@@ -1,5 +1,5 @@
 import { Menu } from "antd"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const items = [
     {
@@ -16,25 +16,17 @@ const items = [
 
 const HeaderContent = () =>{
     const navigate = useNavigate();
+    const locate = useLocation();
     const handleClick = (e:any) =>{
         const item = items.find(i => i.key === Number(e.key));
-        switch(item?.key){
-            case 1:
-                navigate(item.path);
-                break;
-            case 2: 
-                navigate(item.path);
-                break;
-            default:
-                navigate("/");
-                break;
-        }
+        if(item)navigate(item.path);
     }
+    const currentItem = items.find(i =>i.path === locate.pathname);
     return (
        <>
         <Menu   
             mode="horizontal"
-            defaultSelectedKeys={['1']}
+            selectedKeys={[String(currentItem)]}
             onClick={handleClick}
             items={items}
             style={{

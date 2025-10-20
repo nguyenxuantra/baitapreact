@@ -1,4 +1,4 @@
-import {Button, Card, Col, Form, Input, Row, Spin} from "antd";
+import {Button, Col, Row, Spin} from "antd";
 import {useRootStore} from "../../context/RootStoreContext";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {handleFilter} from "../../utils/employee/handleFilter";
@@ -8,8 +8,6 @@ import EmployeeFilter from "../../shared/components/employee/EmployeeFilter";
 import EmployeeCreate from "../../shared/components/employee/EmployeeCreate";
 import {observer} from "mobx-react-lite";
 import Pagination from "../../shared/components/pagination/pagination";
-import {useNavigate} from "react-router-dom";
-import type {Employee} from "../../stores/employees/EmployeeStore";
 import EmployeeCardEdit from "../../shared/components/employee/EmployeeCardEdit";
 
 const EmployeeCard = observer(() => {
@@ -19,8 +17,8 @@ const EmployeeCard = observer(() => {
     useEffect(() => {
         fetchEmployee();
     }, []);
-    
-    // state search, select, pagination
+
+    // state s earch, select, pagination
     const [search, setSearch] = useState("");
     const [select, setSelect] = useState("all");
     const [page, setPage] = useState<number>(1);
@@ -48,11 +46,10 @@ const EmployeeCard = observer(() => {
         const {dataSearch, dataLength} = handleFilter(search, select, page, pageSize, employee);
         return {dataSearch, dataLength};
     }, [employee, select, search, page, pageSize]);
-    
 
     return (
         <>
-            <Row>
+            <Row style={{margin: 16}} >
                 <Col span={6}>
                     <EmployeeSearch onSearch={handleSearch} />
                 </Col>
@@ -62,7 +59,7 @@ const EmployeeCard = observer(() => {
                             <EmployeeTotal totalEmployee={dataLength} />
                         </Col>
                         <Col>
-                            <EmployeeFilter handleSelect={handleSelect} />
+                            <EmployeeFilter value={select} handleSelect={handleSelect} />
                         </Col>
                         <Col>
                             <Button onClick={handleReset} style={{marginLeft: 10}}>
@@ -83,8 +80,13 @@ const EmployeeCard = observer(() => {
                 </Col>
             </Row>
             <Spin spinning={loading}>
-                <EmployeeCardEdit dataSearch={dataSearch}/>
-                <Row>
+                <Row style={{margin: 10}} gutter={[16, 16]}>
+                    {dataSearch.map((employee) => (
+                        <EmployeeCardEdit key={employee.id} employee={employee} />
+                    ))}
+                </Row>
+
+                <Row style={{marginBottom:10}}>
                     <Col span={24}>
                         <Pagination
                             page={page}

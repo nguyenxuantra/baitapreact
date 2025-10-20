@@ -33,7 +33,8 @@ const Pagination = ({page, setPage, pageSize, setPageSize, totalEmployee}:PropPa
                     key={i}
                     onClick={() => setPage(i)}
                     style={{
-                        border: page === i ? "1px solid #000" : "none",
+                        border: page === i ? "1px solid #50b6e6" : "none",
+                        background:"#f5f7f6",
                     }}
                 >
                     {i}
