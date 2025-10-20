@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import { useRootStore } from "../../../context/RootStoreContext";
 import { observer } from "mobx-react-lite";
-import { useMemo } from "react";
+import {  useMemo } from "react";
 
 interface PropEmployeeFilter {
   handleSelect: (value: string) => void;
@@ -18,7 +18,6 @@ const EmployeeFilter = observer(({ handleSelect }: PropEmployeeFilter) => {
     return [{ value: "all", label: "All Departments" }, 
         ...departmentOptions];
   },[employeeStore.employee]);
-   
   return (
     <>
       <Select

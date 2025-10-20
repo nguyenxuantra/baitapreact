@@ -25,7 +25,6 @@ const EmployeeDelete = observer(({isDeleteEmployee, setDeleteEmployee, idDeleteE
     const handleCancel = () =>{
         setDeleteEmployee(false)
     }
-    console.log('đây là loading', loading)
     return (
         <>
             <Modal 

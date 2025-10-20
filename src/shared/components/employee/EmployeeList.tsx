@@ -3,7 +3,7 @@ import { Avatar, Button, Col, Row, type TableProps } from "antd";
 import EmployeeTable from "./EmployeeTable";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import EmployeeDetail from "./EmployeeDetail";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import EmployeeSearch from "./EmployeeSearch";
 import EmployeeFilter from "./EmployeeFilter";
 import { useRootStore } from "../../../context/RootStoreContext";
@@ -11,6 +11,8 @@ import type { Employee } from "../../../stores/employees/EmployeeStore";
 import { observer } from "mobx-react-lite";
 import EmployeeDelete from "./EmployeeDetele";
 import EmployeeCreate from "./EmployeeCreate";
+import { useNavigate } from "react-router-dom";
+import EmployeeTotal from "./EmployeeTotal";
 
 const EmployeeList = observer(() => {
   const { employeeStore } = useRootStore();
@@ -28,6 +30,9 @@ const EmployeeList = observer(() => {
   const [select, setSelect] = useState("all");
 
   const [isCreateEmployee, setCreateEmployee] = useState<boolean>(false);
+  
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(8);
 
   const handleOpenEmployee = (idEmployee: number) => {
     setOpenEmployee(true);
@@ -37,12 +42,12 @@ const EmployeeList = observer(() => {
     setDeleteEmployee(true);
     setIdDeleteEmployee(idEmployee);
   };
-  const handleSearch = (value: string) => {
+  const handleSearch = useCallback((value: string) => {
     setSearch(value);
-  };
-  const handleSelect = (value: string) => {
+  },[]);
+  const handleSelect = useCallback((value: string) => {
     setSelect(value);
-  };
+  },[]);
   const handleSetCreateEmployee = () => {
     setCreateEmployee(true);
   };
@@ -50,6 +55,8 @@ const EmployeeList = observer(() => {
     setSearch("");
     setSelect("all");
   };
+  const navigate = useNavigate();
+  // xử lý lọc, phân trang thủ công, 
   const { dataSearch, dataLength } = useMemo(() => {
     const dataFilter = employee.filter((emp) => {
       const filterSearch =
@@ -63,11 +70,10 @@ const EmployeeList = observer(() => {
       return filterSearch && filterSelect;
     });
     return {
-      dataSearch: dataFilter,
+      dataSearch: dataFilter.slice((page-1)*pageSize, page*pageSize),
       dataLength: dataFilter.length,
     };
-  }, [employee, select, search]);
-
+  }, [employee, select, search, page, pageSize]);
   const columns: TableProps<Employee>["columns"] = [
     {
       title: "id",
@@ -130,6 +136,13 @@ const EmployeeList = observer(() => {
                 <EditOutlined />
               </Button>
               <Button
+                color="cyan"
+                variant="solid"
+                onClick={() => navigate(`employee/${action.id}/edit`)}
+              >
+                <EditOutlined /> redirect
+              </Button>
+              <Button
                 color="danger"
                 variant="solid"
                 onClick={() => handleDeleteEmployee(action.id)}
@@ -152,9 +165,9 @@ const EmployeeList = observer(() => {
         <Col span={12} offset={6}>
           <Row justify={"end"} align={"middle"}>
             <Col>
-              <p>
-                Tổng số nhân viên <span>{dataLength}</span>
-              </p>
+              <EmployeeTotal
+                totalEmployee={dataLength}
+              />
             </Col>
             <Col>
               <EmployeeFilter handleSelect={handleSelect} />
@@ -173,6 +186,14 @@ const EmployeeList = observer(() => {
               >
                 Create
               </Button>
+              <Button
+                style={{ marginLeft: 10 }}
+                color="primary"
+                variant="solid"
+                onClick={() => navigate(`employee/create`)}
+              >
+                redirect Create
+              </Button>
             </Col>
           </Row>
         </Col>
@@ -183,6 +204,11 @@ const EmployeeList = observer(() => {
             data={dataSearch}
             columns={columns}
             loading={loading}
+            page = {page}
+            pageSize = {pageSize}
+            setPage = {setPage}
+            setPageSize = {setPageSize}
+            totalEmployee= {dataLength}
           />
           <EmployeeDetail
             isOpenEmployee={isOpenEmployee}
