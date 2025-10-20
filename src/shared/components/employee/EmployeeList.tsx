@@ -13,27 +13,28 @@ import EmployeeDelete from "./EmployeeDetele";
 import EmployeeCreate from "./EmployeeCreate";
 import { useNavigate } from "react-router-dom";
 import EmployeeTotal from "./EmployeeTotal";
+import { handleFilter } from "../../../utils/employee/handleFilter";
 
 const EmployeeList = observer(() => {
+  // employee store
   const { employeeStore } = useRootStore();
   const { employee, fetchEmployee, loading } = employeeStore;
   useEffect(() => {
     fetchEmployee();
   }, []);
+  // state open detail, edit employee, delete employee
   const [isOpenEmployee, setOpenEmployee] = useState(false);
   const [isDeleteEmployee, setDeleteEmployee] = useState<boolean>(false);
   const [isIdEmployee, setIdEmployee] = useState<number | null>(null);
-  const [isIdDeleteEmployee, setIdDeleteEmployee] = useState<number | null>(
-    null
-  );
+  const [isIdDeleteEmployee, setIdDeleteEmployee] = useState<number | null>(null);
+   const [isCreateEmployee, setCreateEmployee] = useState<boolean>(false);
+  // state search, select, pagination
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("all");
-
-  const [isCreateEmployee, setCreateEmployee] = useState<boolean>(false);
-  
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(8);
 
+  // handle edit, delelete, create employee
   const handleOpenEmployee = (idEmployee: number) => {
     setOpenEmployee(true);
     setIdEmployee(idEmployee);
@@ -42,38 +43,29 @@ const EmployeeList = observer(() => {
     setDeleteEmployee(true);
     setIdDeleteEmployee(idEmployee);
   };
+  const handleSetCreateEmployee = () => {
+    setCreateEmployee(true);
+  };
+  // handle search, select
   const handleSearch = useCallback((value: string) => {
     setSearch(value);
   },[]);
   const handleSelect = useCallback((value: string) => {
     setSelect(value);
   },[]);
-  const handleSetCreateEmployee = () => {
-    setCreateEmployee(true);
-  };
+  // handle reset form
   const handleReset = () => {
     setSearch("");
     setSelect("all");
   };
   const navigate = useNavigate();
-  // xử lý lọc, phân trang thủ công, 
+  // logic handle filter, search, pagination 
   const { dataSearch, dataLength } = useMemo(() => {
-    const dataFilter = employee.filter((emp) => {
-      const filterSearch =
-        emp.id.toString().includes(search) ||
-        emp.name.toLowerCase().includes(search.toLowerCase()) ||
-        emp.address.toLowerCase().includes(search.toLowerCase()) ||
-        emp.city.toLowerCase().includes(search.toLowerCase()) ||
-        emp.country.toLowerCase().includes(search.toLowerCase());
-      const filterSelect =
-        select === "all" || select.toLowerCase() === emp.department.toLowerCase();
-      return filterSearch && filterSelect;
-    });
-    return {
-      dataSearch: dataFilter.slice((page-1)*pageSize, page*pageSize),
-      dataLength: dataFilter.length,
-    };
+    const {dataSearch, dataLength} =handleFilter(search, select, page, pageSize, employee);
+    return {dataSearch, dataLength};
   }, [employee, select, search, page, pageSize]);
+
+  // columns table employee
   const columns: TableProps<Employee>["columns"] = [
     {
       title: "id",

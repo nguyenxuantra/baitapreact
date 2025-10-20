@@ -7,10 +7,12 @@ import type { Employee } from "../../stores/employees/EmployeeStore";
 import { useNavigate } from "react-router-dom";
 
 const EmployeeCreate = observer(() => {
-  const [form] = Form.useForm();
+  // form employee store
   const { employeeStore } = useRootStore();
   const { createEmployeeStore } = useRootStore();
   const { loading, fetchCreateEmployee } = createEmployeeStore;
+  // form employee
+  const [form] = Form.useForm();
   const navigate = useNavigate();
   const handleSubmit = async (value: Employee) => {
     const values = {
@@ -43,10 +45,10 @@ const EmployeeCreate = observer(() => {
           icon={<UploadOutlined />}
         />
       </Form.Item>
-      <Form.Item label="Name" name="name" rules={[{ required: true }]}>
+      <Form.Item label="Name" name="name" rules={[{ required: true, message:"Vui lòng nhập tên nhân viên" }]}>
         <Input placeholder="Tên nhân viên" />
       </Form.Item>
-      <Form.Item label="City" name="city" rules={[{ required: true }]}>
+      <Form.Item label="City" name="city" rules={[{ required: true, message:"Vui lòng nhập thành phố" }]}>
         <Input placeholder="Thành Phố" />
       </Form.Item>
       <Form.Item label="Country" name="country" rules={[{ required: true }]}>
